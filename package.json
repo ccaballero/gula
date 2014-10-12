@@ -1,25 +1,26 @@
 {
   "name": "gula",
   "version": "1.0.0",
-  "description": "gula ====",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "author": "Carlos E. Caballero B.",
+  "homepage": "https://github.com/ccaballero/gula",
+  "license": "GPLv3",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/ccaballero/gula.git"
   },
-  "author": "Carlos E. Caballero B.",
-  "license": "GPLv3",
-  "bugs": {
-    "url": "https://github.com/ccaballero/gula/issues"
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-develop": "^0.4.0",
+    "load-grunt-tasks": "^0.6.0",
+    "time-grunt": "^1.0.0"
   },
-  "homepage": "https://github.com/ccaballero/gula",
   "dependencies": {
     "body-parser": "^1.9.0",
     "express": "^4.9.7",
     "jade": "^1.7.0",
+    "request": "^2.45.0",
     "serve-favicon": "^2.1.5",
     "stylus": "^0.49.1"
   }

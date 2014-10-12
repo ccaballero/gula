@@ -1,0 +1,40 @@
+body, header, section, footer, div, h1, h2, h3, h4, h5, p, ul, li
+    margin: 0
+    padding: 0
+
+body
+    font-family: "Lucida Console","Lucida Sans Typewriter",Monaco,"Bitstream Vera Sans Mono",monospace
+    font-size: 11px
+
+.clear
+    clear: both
+
+#background
+    position: fixed
+    background-color: #000000
+    opacity: 0.85
+    z-index: -1
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+
+footer
+    position: fixed
+    bottom: 0
+    width: 100vw;
+    nav
+        background-color: #000000
+        opacity: 0.5
+        ul
+            float: left
+            list-style: none
+            li
+                float: left
+                a
+                    color: #ffffff
+                    float: left
+                    padding: 0.25rem
+                    &:hover
+                        color: #ff0000
+

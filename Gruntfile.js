@@ -15,7 +15,7 @@ module.exports=function(grunt){
       , watch:{
             server:{
                 files:[
-                    '{,*/}*.js'
+                    'app/{,*/}*.js'
                 ]
               , tasks:[
                     'develop:server'
@@ -27,11 +27,11 @@ module.exports=function(grunt){
               , options:{livereload:reloadPort}
             }
           , styl:{
-                files:['stylus/{,*/}*.styl']
+                files:['app/stylus/{,*/}*.styl']
               , options:{livereload:reloadPort}
             }
           , jade:{
-                files:['views/{,*/}*.jade']
+                files:['app/views/{,*/}*.jade']
               , options:{livereload:reloadPort}
             }
           , test:{
@@ -41,7 +41,9 @@ module.exports=function(grunt){
         }
 
       , develop:{
-            server:{file:'app.js'}
+            server:{
+                file:'app/index.js'
+            }
         }
 
       , mochacli:{
@@ -55,8 +57,8 @@ module.exports=function(grunt){
 
     grunt.registerTask('test',['mochacli']);
 
-    grunt.config.requires('watch.files');
-    filescontrol=grunt.config('watch.files');
+    grunt.config.requires('watch.server.files');
+    filescontrol=grunt.config('watch.server.files');
     filescontrol=grunt.file.expand(filescontrol);
 
     grunt.registerTask('delayed-livereload',
