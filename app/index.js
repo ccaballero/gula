@@ -1,11 +1,16 @@
 'use strict';
 
 var http=require('http')
+  , Tail=require('tail').Tail
+  , tails=new Array()
   , express=require('express')
   , favicon=require('serve-favicon')
   , bodyparser=require('body-parser')
   , join=require('path').join
   , app=express()
+  , server=require('http').Server(app)
+  , io=require('socket.io')(server)
+  , base='/var/log'
 
 // async methods
 app.set('port',process.env.PORT||3000);
@@ -25,7 +30,14 @@ app.use(express.static(join(__dirname,'..','public')));
 app.use(express.static(join(__dirname,'..','bower_components')));
 app.locals.pretty=true;
 
-require('./controllers/home')(app);
+app.get('/',function(request,response){
+    response.render('index');
+});
+app.put('/tail/:file',function(request,response){
+    console.log('add the log file: '+base+request.params.file);
+    tails.push(base+request.params.file);
+    response.send('OK');
+});
 
 app.use(function(req,res){
     res.status(404).render('404.jade',{
@@ -34,7 +46,12 @@ app.use(function(req,res){
     });
 });
 
-http.createServer(app).listen(app.get('port'),function(){
+var tail=new Tail(base+'/messages');
+tail.on('line',function(data){
+    io.emit('follow',data);
+});
+
+server.listen(app.get('port'),function(){
     console.log('Express server listening on port '+app.get('port'));
 });
 
