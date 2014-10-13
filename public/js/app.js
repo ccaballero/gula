@@ -32,8 +32,8 @@ $(function(){
 
     $('.follow').click(menu_follow);
 
-    socket.on('follow', function(msg){
-        $('#content>pre').append(msg+'\n');
+    socket.on('follow',function(msg){
+        $('#content>pre').append('\n'+msg);
     });
 });
 

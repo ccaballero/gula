@@ -10,7 +10,7 @@ var http=require('http')
   , app=express()
   , server=require('http').Server(app)
   , io=require('socket.io')(server)
-  , base='/var/log'
+  , base=join(__dirname,'..')
 
 // async methods
 app.set('port',process.env.PORT||3000);
@@ -46,7 +46,7 @@ app.use(function(req,res){
     });
 });
 
-var tail=new Tail(base+'/messages');
+var tail=new Tail(base+'/example.log');
 tail.on('line',function(data){
     io.emit('follow',data);
 });
