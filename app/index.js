@@ -10,7 +10,7 @@ var http=require('http')
   , app=express()
   , server=require('http').Server(app)
   , io=require('socket.io')(server)
-  , base=join(__dirname,'..')
+  , base=process.argv[2]||join(__dirname,'..')
 
 // async methods
 app.set('port',process.env.PORT||3000);
@@ -46,10 +46,16 @@ app.use(function(req,res){
     });
 });
 
-var tail=new Tail(base+'/example.log');
-tail.on('line',function(data){
-    io.emit('follow',data);
+io.sockets.on('connection',function(socket){
+    socket.on('message',function(message){
+        console.log('message received:'+message);
+    });
 });
+
+//var tail=new Tail(join(base+'/example.log'));
+//tail.on('line',function(data){
+//    io.emit('follow',data);
+//});
 
 server.listen(app.get('port'),function(){
     console.log('Express server listening on port '+app.get('port'));
